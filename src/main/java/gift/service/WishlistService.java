@@ -1,5 +1,5 @@
 package gift.service;
-
+/*
 import gift.model.Product;
 import gift.repository.ProductRepository;
 import gift.repository.WishlistRepository;
@@ -48,3 +48,5 @@ public class WishlistService {
         wishlistRepository.deleteByUserEmailAndProductId(email, productId);
     }
 }
+
+ */

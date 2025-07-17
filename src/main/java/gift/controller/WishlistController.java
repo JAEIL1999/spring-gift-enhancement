@@ -1,5 +1,5 @@
 package gift.controller;
-
+/*
 import gift.jwt.JwtUtil;
 import gift.model.Product;
 import gift.service.WishlistService;
@@ -63,3 +63,5 @@ public class WishlistController {
         throw new IllegalArgumentException("Invalid authorization");
     }
 }
+
+ */

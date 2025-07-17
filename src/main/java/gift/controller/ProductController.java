@@ -1,5 +1,5 @@
 package gift.controller;
-
+/*
 import gift.dto.product.ProductRequestDto;
 
 import gift.service.ProductService;
@@ -73,3 +73,5 @@ public class ProductController {
     }
 
 }
+
+ */
