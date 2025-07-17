@@ -59,5 +59,4 @@ public class UserRepository {
         return BCrypt.checkpw(requestPassword, userPwd);
     }
 }
-
  */
