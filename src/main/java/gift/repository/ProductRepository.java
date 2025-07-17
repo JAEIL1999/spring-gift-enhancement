@@ -1,16 +1,12 @@
 package gift.repository;
 
-import gift.dto.product.ProductRequestDto;
 import gift.model.Product;
-import org.springframework.jdbc.core.simple.JdbcClient;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
+}
+/*
 @Repository
 public class ProductRepository {
     private final JdbcClient jdbc;
@@ -68,4 +64,6 @@ public class ProductRepository {
                 .update();
     }
 }
+
+ */
 
