@@ -1,5 +1,6 @@
 package gift.service;
 
+/*
 import gift.dto.product.ProductRequestDto;
 import gift.model.Product;
 import gift.repository.ProductRepository;
@@ -50,3 +51,4 @@ public class ProductService {
         productRepository.delete(id);
     }
 }
+ */

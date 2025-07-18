@@ -1,15 +1,24 @@
 package gift.model;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "products")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "price", nullable = false)
     private int price;
-    private boolean usableKakao;
+
+    @Column(name = "image_url")
     private String imageUrl;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+
+    private boolean usableKakao;
 
     public Product() {
 
@@ -45,9 +54,5 @@ public class Product {
     public void setUsableKakao(boolean usableKakao) {this.usableKakao = usableKakao;}
     public String getImageUrl() {return imageUrl;}
     public void setImageUrl(String imageUrl) {this.imageUrl = imageUrl;}
-    public LocalDateTime getCreatedAt() {return createdAt;}
-    public void setCreatedAt(LocalDateTime createdAt) {this.createdAt = createdAt;}
-    public LocalDateTime getUpdatedAt() {return updatedAt;}
-    public void setUpdatedAt(LocalDateTime updatedAt) {this.updatedAt = updatedAt;}
 
 }

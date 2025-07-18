@@ -1,17 +1,12 @@
 package gift.repository;
 
 import gift.model.User;
-import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.jdbc.core.simple.JdbcClient;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.time.LocalDateTime;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+public interface UserRepository extends JpaRepository<User, Long> {
 
+}
+/*
 @Repository
 public class UserRepository {
     private final JdbcClient jdbc;
@@ -64,3 +59,4 @@ public class UserRepository {
         return BCrypt.checkpw(requestPassword, userPwd);
     }
 }
+ */

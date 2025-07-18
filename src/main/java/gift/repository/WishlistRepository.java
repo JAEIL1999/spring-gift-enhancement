@@ -1,11 +1,12 @@
 package gift.repository;
 
-import gift.model.Product;
-import org.springframework.jdbc.core.simple.JdbcClient;
-import org.springframework.stereotype.Repository;
+import gift.model.Wishlist;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+public interface WishlistRepository extends JpaRepository<Wishlist, Long> {
 
+}
+/*
 @Repository
 public class WishlistRepository {
     JdbcClient jdbc;
@@ -48,3 +49,4 @@ public class WishlistRepository {
     }
 
 }
+ */
