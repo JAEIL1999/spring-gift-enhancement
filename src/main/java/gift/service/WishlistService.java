@@ -1,27 +1,31 @@
 package gift.service;
-/*
+
 import gift.model.Product;
+import gift.model.User;
+import gift.model.Wishlist;
 import gift.repository.ProductRepository;
+import gift.repository.UserRepository;
 import gift.repository.WishlistRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
 public class WishlistService {
     private final WishlistRepository wishlistRepository;
     private final ProductRepository productRepository;
-
-    public WishlistService(WishlistRepository wishlistRepository, ProductRepository productRepository) {
+    private final UserRepository userRepository;
+    public WishlistService(WishlistRepository wishlistRepository, ProductRepository productRepository, UserRepository userRepository) {
         this.wishlistRepository = wishlistRepository;
         this.productRepository = productRepository;
+        this.userRepository = userRepository;
     }
 
-    public List<Product> getWishlist(String email) {
-        return wishlistRepository.findByUserEmail(email);
+    public Page<Product> getWishlist(Pageable pageable, String email) {
+        return wishlistRepository.findByUserEmail(pageable, email);
     }
 
     public Product addProduct(String email, Long productId) {
@@ -30,17 +34,19 @@ public class WishlistService {
             try {
                 Product product = productRepository
                         .findById(productId)
-                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "상품이 존재하지 않습니다"))
-                        .toEntity();
-                wishlistRepository.save(email, product);
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "상품이 존재하지 않습니다"));
+                User member = userRepository
+                        .findByEmail(email)
+                        .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "사용자가 존재하지 않습니다"));
+                Wishlist wishlist = new Wishlist(member, product);
+                wishlistRepository.save(wishlist);
                 return product;
             } catch (NoSuchElementException e) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "상품이 존재하지 않습니다");
             }
         }
         return productRepository.findById(productId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "상품이 존재하지 않습니다"))
-                .toEntity();
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "상품이 존재하지 않습니다"));
 
     }
 
@@ -49,4 +55,3 @@ public class WishlistService {
     }
 }
 
- */

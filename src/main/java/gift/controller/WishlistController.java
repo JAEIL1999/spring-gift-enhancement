@@ -1,13 +1,13 @@
 package gift.controller;
-/*
+
 import gift.jwt.JwtUtil;
 import gift.model.Product;
 import gift.service.WishlistService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/wishlist")
@@ -21,9 +21,10 @@ public class WishlistController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Product>> getWishlist(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization){
+    public ResponseEntity<Page<Product>> getWishlist(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization, Pageable pageable){
         String userEmail = extractEmailFromHeader(authorization);
-        return ResponseEntity.ok(wishlistService.getWishlist(userEmail));
+        Page<Product> wishlistPage = wishlistService.getWishlist(pageable,userEmail);
+        return ResponseEntity.ok(wishlistPage);
     }
 
     @PostMapping("/{productId}")
@@ -64,4 +65,3 @@ public class WishlistController {
     }
 }
 
- */
