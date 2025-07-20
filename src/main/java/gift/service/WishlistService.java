@@ -48,10 +48,10 @@ public class WishlistService {
         return productRepository.findById(productId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "상품이 존재하지 않습니다"));
 
+
     }
 
     public void deleteProduct(String email, Long productId) {
         wishlistRepository.deleteByUserEmailAndProductId(email, productId);
     }
 }
-

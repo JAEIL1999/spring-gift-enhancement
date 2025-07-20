@@ -18,7 +18,6 @@ public class User {
     @Column(name = "name", nullable = false)
     private String name;
 
-
     public User(String email, String password, String name) {
         this.email = email;
         this.password = password;
