@@ -1,5 +1,5 @@
 package gift.service;
-/*
+
 import gift.dto.user.UserRequestDto;
 import gift.jwt.JwtUtil;
 import gift.model.User;
@@ -57,7 +57,4 @@ public class UserService {
                 password,
                 BCrypt.gensalt());
     }
-
 }
-
- */
