@@ -18,6 +18,7 @@ public class Product {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Transient
     private boolean usableKakao;
 
     public Product() {
