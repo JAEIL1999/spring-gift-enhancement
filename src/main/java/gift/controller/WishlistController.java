@@ -2,6 +2,7 @@ package gift.controller;
 
 import gift.jwt.JwtUtil;
 import gift.model.Product;
+import gift.model.Wishlist;
 import gift.service.WishlistService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,9 +22,9 @@ public class WishlistController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Product>> getWishlist(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization, Pageable pageable){
+    public ResponseEntity<Page<Wishlist>> getWishlist(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization, Pageable pageable){
         String userEmail = extractEmailFromHeader(authorization);
-        Page<Product> wishlistPage = wishlistService.getWishlist(pageable,userEmail);
+        Page<Wishlist> wishlistPage = wishlistService.getWishlist(pageable,userEmail);
         return ResponseEntity.ok(wishlistPage);
     }
 

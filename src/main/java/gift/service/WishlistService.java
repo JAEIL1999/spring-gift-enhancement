@@ -24,7 +24,7 @@ public class WishlistService {
         this.userRepository = userRepository;
     }
 
-    public Page<Product> getWishlist(Pageable pageable, String email) {
+    public Page<Wishlist> getWishlist(Pageable pageable, String email) {
         return wishlistRepository.findByUserEmail(pageable, email);
     }
 
