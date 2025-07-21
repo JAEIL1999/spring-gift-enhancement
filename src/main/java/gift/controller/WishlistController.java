@@ -65,4 +65,3 @@ public class WishlistController {
         throw new IllegalArgumentException("Invalid authorization");
     }
 }
-
