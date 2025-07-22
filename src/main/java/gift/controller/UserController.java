@@ -1,5 +1,5 @@
 package gift.controller;
-/*
+
 import gift.dto.user.UserRequestDto;
 import gift.service.UserService;
 import jakarta.validation.Valid;
@@ -29,4 +29,3 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(return_token);
     }
 }
- */

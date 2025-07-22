@@ -1,12 +1,12 @@
 package gift.service;
 
-/*
 import gift.dto.product.ProductRequestDto;
 import gift.model.Product;
 import gift.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.NoSuchElementException;
 
 @Service
@@ -16,19 +16,20 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public ProductService(ProductRepository productRepository) {
-
         this.productRepository = productRepository;
     }
 
-    public List<ProductRequestDto> findAllProducts() {
-
-        return productRepository.findAll();
+    @Transactional(readOnly = true)
+    public Page<Product> findAllProducts(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
-    public ProductRequestDto findProduct(Long id) {
+    @Transactional(readOnly = true)
+    public Product findProduct(Long id) {
         return productRepository.findById(id).orElseThrow(() -> new NoSuchElementException("상품이 없습니다"));
     }
 
+    @Transactional
     public void createProduct(ProductRequestDto productDto) {
         Product product;
         if(productDto.getImageUrl()==null || productDto.getImageUrl().isEmpty()) {
@@ -43,12 +44,15 @@ public class ProductService {
         productDto.setId(product.getId());
     }
 
+    @Transactional
     public void updateProduct(ProductRequestDto productDto) {
-        productRepository.update(productDto);
+        Product product = productRepository.findById(productDto.getId())
+                .orElseThrow(()->new IllegalArgumentException("상품이 없습니다."));
+        productRepository.update(product);
     }
 
+    @Transactional
     public void deleteProduct(Long id) {
         productRepository.delete(id);
     }
 }
- */

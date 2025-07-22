@@ -1,9 +1,11 @@
 package gift.controller;
-/*
-import gift.dto.product.ProductRequestDto;
 
+import gift.dto.product.ProductRequestDto;
+import gift.model.Product;
 import gift.service.ProductService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,17 +18,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @RequestMapping("/admin/products")
-
 public class ProductController {
 
     private final ProductService service;
+
     public ProductController(ProductService service){
         this.service = service;
     }
 
     @GetMapping // 전체 상품 조회 API
-    public String getProducts(Model model) {
-        model.addAttribute("products", service.findAllProducts());
+    public String getProducts(Model model, Pageable pageable) {
+        Page<Product> productPage = service.findAllProducts(pageable);
+        model.addAttribute("products", productPage);
         return "admin/product_list";
     }
 
@@ -53,8 +56,8 @@ public class ProductController {
 
     @GetMapping("/{id}/edit")
     public String editProduct(@PathVariable Long id, Model model) {
-        ProductRequestDto productRequestDto = service.findProduct(id);
-        model.addAttribute("productRequestDto", productRequestDto);
+        Product product = service.findProduct(id);
+        model.addAttribute("productRequestDto", product);
         model.addAttribute("editMode", true);
         return "/admin/product_form";
     }
@@ -69,9 +72,5 @@ public class ProductController {
     public String deleteProduct(@PathVariable Long id) {
         service.deleteProduct(id);
         return "redirect:/admin/products";
-
     }
-
 }
-
- */
