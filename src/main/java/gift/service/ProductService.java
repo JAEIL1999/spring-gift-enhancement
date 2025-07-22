@@ -53,6 +53,6 @@ public class ProductService {
 
     @Transactional
     public void deleteProduct(Long id) {
-        productRepository.delete(id);
+        productRepository.deleteById(id);
     }
 }
