@@ -2,6 +2,11 @@ package gift.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 @Entity
 @Table(name = "products")
 public class Product {
@@ -21,8 +26,17 @@ public class Product {
     @Transient
     private boolean usableKakao;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Options> options = new ArrayList<>();
+
     public Product() {
 
+    }
+
+    public void update(String name, int price, String imageUrl) {
+        this.name = name;
+        this.price = price;
+        this.imageUrl = imageUrl;
     }
 
     public Product(String name, int price, boolean usableKakao, String imageUrl) {
@@ -44,16 +58,23 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
+    public Product(String name, String optionName, int quantity) {
+        this.name = name;
+        addOption(new Options(optionName, quantity));
+    }
+
     //Getters and Setters
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
     public int getPrice() {return price;}
-    public void setPrice(int price) {this.price = price;}
     public boolean isUsableKakao() {return usableKakao;}
-    public void setUsableKakao(boolean usableKakao) {this.usableKakao = usableKakao;}
     public String getImageUrl() {return imageUrl;}
     public void setImageUrl(String imageUrl) {this.imageUrl = imageUrl;}
 
+    public void addOption(Options option) {
+        this.options.add(option);
+        option.setProduct(this);
+    }
 }

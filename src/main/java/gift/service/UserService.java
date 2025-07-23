@@ -34,16 +34,12 @@ public class UserService {
     public String login(UserRequestDto userRequestDto) {
         User get_user = userRepository.findByEmail(userRequestDto.getEmail())
                 .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "사용자가 존재하지 않습니다"));
-        Long get_id = get_user.getId();
 
-        if (!userRepository.checkPassword(userRequestDto.getEmail(), userRequestDto.getPassword())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "비밀번호가 틀립니다.");
+        if(!BCrypt.checkpw(userRequestDto.getPassword(), get_user.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,"비밀번호가 틀립니다.");
         }
 
-        User access_user = userRequestDto.toEntity();
-        access_user.setId(get_id);
-
-        return jwtUtil.makeToken(access_user);
+        return jwtUtil.makeToken(get_user);
     }
 
     private String makeHashPwd(String password) {
