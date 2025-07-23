@@ -3,8 +3,6 @@ package gift.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -29,9 +27,7 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Options> options = new ArrayList<>();
 
-    public Product() {
-
-    }
+    protected Product() {}
 
     public void update(String name, int price, String imageUrl) {
         this.name = name;
@@ -49,18 +45,6 @@ public class Product {
         this.name = name;
         this.price = price;
         this.usableKakao = usableKakao;
-    }
-
-    public Product(Long id, String name, int price, String imageUrl) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.imageUrl = imageUrl;
-    }
-
-    public Product(String name, String optionName, int quantity) {
-        this.name = name;
-        addOption(new Options(optionName, quantity));
     }
 
     //Getters and Setters

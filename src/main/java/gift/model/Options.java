@@ -38,7 +38,7 @@ public class Options {
         this.quantity = restStock;
     }
 
-    public Options() {}
+    protected Options() {}
     public Options(String name, int quantity) {
         this.name = name;
         this.quantity = quantity;
